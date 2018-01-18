@@ -1,0 +1,17 @@
+{
+  "name": "yawallet",
+  "version": "0.0.1",
+  "description": "API for working with yandex money",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "koa": "^2.4.1",
+    "koa-router": "^7.3.0",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {},
+  "author": "tmfck",
+  "license": "MIT"
+}

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/index.css" crossorigin="anonymous">
+  <title>Yawallet v0.1</title>
+</head>
+<body class="bg-dark text-white">
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">YaWallet</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto"></ul>
+      <button class="btn btn-outline-info mx-2 my-2 my-sm-0" data-toggle="modal" data-target="#enterModal">Добавить кошелёк</button>
+      <button class="btn btn-outline-info my-2 my-sm-0" data-toggle="modal" data-target="#tokenModal">Работа с токенами</button>
+    </div>
+  </nav>
+
+  <div class="card text-dark">
+    <ul class="list-group list-group-flush"></ul>
+  </div>
+
+  <div class="pl-3 py-2 text-muted">
+    <!--<small class="m-0">Придумано и воплощено в жизнь @tmfck 18.01.2018, примерно в 5 часов утра.</small>-->
+    <p class="m-0">Внимание! Все токены хранятся в браузере, и после его очистки токены придётся добавить заново.</p>
+    <p class="m-0">При получении нового токена старый аннулируется. Если вы хотите просматривать балансы с различных устройств, то передайте токены с одного устройства на остальные.</p>
+  </div>
+</div>
+
+  <div class="modal fade text-dark" id="enterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="enterModalTitle">Добавление кошелька</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Чтобы добавить свой кошелёк, необходимо войти в свою учётную запись и предоставить разрешение на чтение информации.
+          Приложение запрашивает только один пункт:
+          <b>видеть информацию о кошельке: статус, <u>баланс</u>, привязанные карты.</b>
+        </div>
+        <div class="modal-footer">
+          <form method="post" action="/api/token.get">
+            <input type="hidden" name="instance_name" value="0" />
+            <button type="submit" class="btn btn-info">Войти в учётную запись</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade text-dark" id="tokenModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tokenModalTitle">Импорт/экспорт токенов</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Экспорт токенов</label><br/>
+            <input id="input__tokens" class="form-control" readonly />
+            <button class="btn btn-info" id="btn__exportTokens">Сохранить в буфер обмена</button>
+            <br/>
+            <small class="p-0 m-0">
+              Пожалуйста, не храните токены в открытом виде. Хоть токены и выдаются с минимальными правами на чтение,
+              будет неприятно, если они попадут в чужие руки. Если это произойдёт, то просто получите новые токены,
+              при этом старые аннулируются.
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="form__import">Импорт токенов</label>
+            <textarea class="form-control" id="form__import" rows="3" placeholder="{<token>: {name: <name> }, ...}"></textarea>
+            <button class="btn btn-info" id="btn__tokenSubmit">Добавить</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-info" data-dismiss="modal">Готово</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <li class="list-group-item" id="list-item" hidden>
+    <span class="text-dark"></span>
+    <input name="name" placeholder="Введите имя кошелька" hidden />
+    <button class="btn btn-outline-primary" hidden>Готово</button>
+    <button type="button" class="float-right close" aria-label="Close" style="user-select: none">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <span class="float-right mr-2 cash">Загрузка...</span>
+  </li>
+
+<!-- Optional JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="js/index.js" crossorigin="anonymous"></script>
+</body>
+</html>
